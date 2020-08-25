@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>camera</title>
+    <g id="Login-Signup-Flow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Onboarding-icons" transform="translate(-28.000000, -167.000000)">
+            <g id="camera" transform="translate(28.000000, 167.000000)">
+                <rect id="Rectangle" x="0" y="0" width="16" height="16"></rect>
+                <path d="M10.6666667,3.66666667 L2,3.66666667 C1.44771525,3.66666667 1,4.11438192 1,4.66666667 L1,11.3333333 C1,11.8856181 1.44771525,12.3333333 2,12.3333333 L10.6666667,12.3333333 L10.7629733,12.3287556 C11.2700746,12.2802991 11.6666667,11.8531307 11.6666667,11.3333333 L11.6666667,9.468 L14.4864255,11.2804001 C14.7082633,11.4229975 15,11.2637159 15,11 L15,5 L14.9956664,4.9451599 C14.95868,4.71506982 14.6924178,4.58718803 14.4864255,4.71959989 L11.6666667,6.53266667 L11.6666667,4.66666667 C11.6666667,4.11438192 11.2189514,3.66666667 10.6666667,3.66666667 Z" id="Combined-Shape" fill="#FFFFFF" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>

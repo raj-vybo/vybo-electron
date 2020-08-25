@@ -1,0 +1,312 @@
+@import '~react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import 'https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400;500;600;700;900&display=swap';
+
+body {
+  margin: 0;
+  font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.App {
+  text-align: center;
+}
+
+.flip_horizontal {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+}
+
+canvas {
+  border: 2px solid #000;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+/*
+body {
+  padding-bottom: 72px;
+} */
+
+#mainCanvas {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.5);
+}
+
+#stream {
+  border: 8px solid #343a40;
+  margin: 0px;
+  padding: 0px;
+  border-radius: 15px;
+}
+
+#dummyVideoScreen {
+  /* border: 8px solid #343a40; */
+  margin: 0px;
+  padding: 0px;
+  border-radius: 10px;
+  width: 320px;
+  height: auto;
+  position: relative;
+  left: 16px;
+  /* -webkit-box-shadow: 6px 7px 27px 9px rgba(0, 0, 0, 0.76);
+  -moz-box-shadow: 6px 7px 27px 9px rgba(0, 0, 0, 0.76);
+  box-shadow: 6px 7px 27px 9px rgba(0, 0, 0, 0.76); */
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 72px;
+  background-color: #535353 !important;
+  color: #fff;
+  border-top: 1px solid #000;
+  opacity: 0.9;
+}
+
+#VideoFrameSVG {
+  position: absolute;
+  top: -6px;
+  width: 340px;
+  left: 6px;
+}
+
+.container-cover {
+  height: calc(100vh - 128px);
+}
+
+.border-black,
+.bg-dark .border-right {
+  border-color: black !important;
+}
+
+.border-black button.close {
+  opacity: 1;
+  color: white !important;
+}
+
+#mousepoint {
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  background-color: grey;
+  opacity: 0.5;
+  z-index: 1;
+  position: absolute;
+}
+
+.settings-text {
+  font-weight: 900;
+}
+
+#wytboard-container {
+  background-position: 'center';
+  background-size: 'cover';
+  background-repeat: 'no-repeat';
+}
+
+#heyVyboBtn {
+  /* background-image: linear-gradient(#383838, #545454, #545454, #383838); */
+  border-top-left-radius: 4px !important;
+}
+
+.bgBlackGradient {
+  background-image: linear-gradient(#383838, #545454, #545454, #383838);
+}
+
+.bgBlueGradient {
+  background-image: linear-gradient(#0069d9, #0069d9);
+}
+
+#settingsPopup .modal-content {
+  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.7);
+}
+
+.settingsPopupIcon {
+  -webkit-box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.rounded-border {
+  border-radius: 50% !important;
+}
+
+.pointerModeButtons:focus {
+  box-shadow: none !important;
+}
+.pointerModeButtons:hover {
+  color: black;
+}
+
+.spacebarSuggestions {
+  position: absolute;
+  bottom: 85px;
+  background-color: #343a40c2;
+  color: whitesmoke;
+  border-radius: 0.2em;
+  font-weight: 500;
+  margin-left: 45%;
+}
+
+.mt-15-rem {
+  margin-top: 20rem !important;
+}
+.mt-5-rem {
+  margin-top: 5rem !important;
+}
+
+.no-underline {
+  text-decoration: none !important;
+}
+
+.font-size-130 {
+  font-size: 1.3em !important;
+}
+
+.spinner-grow {
+  width: 1rem !important;
+  height: 1rem !important;
+}
+
+.vh-80 {
+  height: 80vh !important;
+}
+
+/** *********************** New UI Styles ***********************  **/
+
+/** START:: Success message Shake Animation for account flow **/
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+.shakeAnimation {
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+/** END:: Success message Shake Animation for account flow **/
+
+/** START:: Header dropdown toggle icon styles **/
+.dropdown-toggle::after {
+  margin: 0px 16px 0px 16px;
+}
+
+.dropdown-menu {
+  background-color: #2a303e;
+  border-radius: 6px;
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  font-size: 15px;
+  letter-spacing: -0.01px;
+  line-height: 16px;
+  padding: 0px;
+  font-weight: 500;
+}
+.dropdown-item {
+  color: #fff;
+  padding: 10px 16px;
+  align-items: center;
+  border-radius: 6px;
+}
+/** END:: Header dropdown toggle icon styles */
+
+/** START:: React Modal Background Blur styles */
+.modal-backdrop {
+  animation: blur 0.2s ease forwards;
+}
+
+@keyframes blur {
+  from {
+    backdrop-filter: blur(0px) brightness(100%);
+  }
+  100% {
+    backdrop-filter: blur(10px) brightness(80%);
+  }
+}
+/** END:: React Modal Background Blur styles */
+
+#cameraPopup .modal-content {
+  width: fit-content;
+  background-color: transparent !important;
+  border: 0 !important;
+  margin-left: 20%;
+}
+
+#settingsPopup .modal-content {
+  width: fit-content;
+  background-color: transparent !important;
+  border: 0 !important;
+  margin-left: 20%;
+  border-radius: 12px;
+  width: 710px;
+}

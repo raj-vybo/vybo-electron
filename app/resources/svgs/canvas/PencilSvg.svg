@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>pencil_w</title>
+    <defs>
+        <path d="M7.7876975,0.378043207 L0.472348434,6.98226172 C0.171760536,7.25362925 1.86517468e-14,7.63683295 1.86517468e-14,8.03921887 L1.86517468e-14,10.815001 C1.86517468e-14,11.6104878 0.656399738,12.2500002 1.45968935,12.2500002 L4.27918695,12.2500002 C4.64940072,12.2500002 5.00625974,12.1117021 5.27705355,11.8623615 L12.5381766,5.17648955 C13.1420105,4.62049347 13.1555969,3.6825005 12.5678294,3.10985463 L9.80255777,0.415725864 C9.24886433,-0.123722571 8.36171596,-0.140174491 7.7876975,0.378043207 Z" id="path-1"></path>
+        <filter x="-50.0%" y="-44.9%" width="200.0%" height="206.1%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.24 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Login-Signup-Flow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="App-icons" transform="translate(-343.000000, -115.000000)">
+            <g id="pencil_w" transform="translate(346.000000, 117.000000)">
+                <rect id="Rectangle" x="0" y="0" width="16" height="16"></rect>
+                <g id="Group" transform="translate(1.500000, 1.500000)" fill-rule="nonzero">
+                    <g id="Path">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                        <use fill="#FFFFFF" xlink:href="#path-1"></use>
+                    </g>
+                    <path d="M8.12275139,0.749175109 C8.50110103,0.407605124 9.08890739,0.41850583 9.45364125,0.773856092 L9.45364125,0.773856092 L12.2189129,3.46798486 C12.601196,3.84043293 12.592412,4.44687645 12.1994937,4.8086664 L12.1994937,4.8086664 L4.93837061,11.4945383 C4.76019859,11.6585949 4.52434008,11.7500002 4.27918695,11.7500002 L4.27918695,11.7500002 L1.45968935,11.7500002 C0.929667555,11.7500002 0.5,11.3313868 0.5,10.815001 L0.5,10.815001 L0.5,8.03921887 C0.5,7.77888517 0.611404133,7.53033869 0.807402327,7.35339363 L0.807402327,7.35339363 L6.562,2.15700021 L6.88038343,1.86927313 L6.881,1.87000021 L6.562,2.15700021 L5.75304413,2.89134619 L9.72509384,7.08378622 L10.8770676,6.02004645 L6.881,1.87000021 Z" id="Combined-Shape" fill="#000000"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

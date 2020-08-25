@@ -1,0 +1,17 @@
+{
+  "name": "wytboard",
+  "productName": "wytboard",
+  "version": "1.2.0",
+  "description": "A Wytboarding Electron application based on React, React Router, Webpack, React Hot Loader for rapid application development",
+  "main": "./main.prod.js",
+  "author": {
+    "name": "akhilesh",
+    "email": "ksr.akhilesh@wytboard.io",
+    "url": "https://github.com/wytboard/wytboard"
+  },
+  "scripts": {
+    "electron-rebuild": "node -r ../internals/scripts/BabelRegister.js ../internals/scripts/ElectronRebuild.js",
+    "postinstall": "yarn electron-rebuild"
+  },
+  "license": "MIT"
+}

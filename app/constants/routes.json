@@ -1,0 +1,9 @@
+{
+  "HOME": "/",
+  "LOGIN": "/login",
+  "SIGNUP": "/signup",
+  "FORGOT_PASSWORD": "/forgot-password",
+  "SET_PASSWORD": "/set-password/:resetOrRegister",
+  "RE_VERIFY": "/re-verify",
+  "FEEDBACK": "/feedback"
+}
