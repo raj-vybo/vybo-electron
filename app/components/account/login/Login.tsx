@@ -2,7 +2,6 @@ import React, { FormEvent, useReducer } from 'react';
 import EmailAddressSvg from 'resources/svgs/authentication/EmailAddressSvg.svg';
 import { useHistory, Link } from 'react-router-dom';
 import { machineIdSync } from 'node-machine-id';
-import { Form } from 'react-bootstrap';
 import VyboAccountButton from '../shared/VyboSubmitButton/VyboAccountButton';
 import VyboAccountErrorMsg from '../shared/VyboAccountError/VyboAccountError';
 import VyboAccountTemplate from '../shared/VyboAccountTemplate/VyboAccountTemplate';
@@ -15,7 +14,6 @@ import { useAuth } from '../helpers/userAuth';
 import { LoginResponse, FormChangePropTypes } from './login.types';
 import emailValidator from '../validators/email.validator';
 import { passwordValidator } from '../validators/password.validator';
-
 import {
   FORGOT_PASSOWRD_BUTTON_STYLES,
   SIGN_UP_LINE_STYLES,
@@ -71,47 +69,47 @@ const Login = () => {
       {{
         mainContent: (
           <>
-            <Form
-              onSubmit={onLoginFormSubmit}
-              className="w-100 d-flex align-items-center justify-content-center flex-column"
-            >
-              <VyboInputBox
-                iconAlt="email"
-                placeholder="Email address "
-                iconSource={EmailAddressSvg}
-                type="text"
-                error={state.emailError || undefined}
-                value={state.email}
-                onChange={(e) => onFormChange({ email: e.target.value })}
-              />
-              <VyboInputPassword
-                placeholder="Password"
-                error={state.passwordError || undefined}
-                value={state.password}
-                onChange={(e) => onFormChange({ password: e.target.value })}
-              />
-              <p style={FORGOT_PASSOWRD_BUTTON_STYLES} className="mb-0 mr-2">
-                <Link
-                  to="/forgot-password"
-                  style={{
-                    textDecoration: 'none',
-                    color: '#9FA5AE',
-                  }}
-                >
-                  Forgot password ?
-                </Link>
-              </p>
-              {state.error && (
-                <VyboAccountErrorMsg>{state.error}</VyboAccountErrorMsg>
-              )}
-              <VyboAccountButton
-                hasError={!!state.error}
-                disabled={state.submitting}
-                type="submit"
+            <VyboInputBox
+              iconAlt="email"
+              placeholder="Email address "
+              iconSource={EmailAddressSvg}
+              type="text"
+              error={state.emailError || undefined}
+              value={state.email}
+              onChange={(e) => onFormChange({ email: e.target.value })}
+            />
+
+            <VyboInputPassword
+              placeholder="Password"
+              error={state.passwordError || undefined}
+              value={state.password}
+              onChange={(e) => onFormChange({ password: e.target.value })}
+            />
+
+            <p style={FORGOT_PASSOWRD_BUTTON_STYLES} className="mb-0 mr-2">
+              <Link
+                to="/forgot-password"
+                style={{
+                  textDecoration: 'none',
+                  color: '#9FA5AE',
+                }}
               >
-                Log In
-              </VyboAccountButton>
-            </Form>
+                Forgot password ?
+              </Link>
+            </p>
+
+            {state.error && (
+              <VyboAccountErrorMsg>{state.error}</VyboAccountErrorMsg>
+            )}
+
+            <VyboAccountButton
+              onClick={onLoginFormSubmit}
+              hasError={!!state.error}
+              disabled={state.submitting}
+            >
+              Log In
+            </VyboAccountButton>
+
             <p style={SIGN_UP_LINE_STYLES}>
               Dont have and account? &nbsp;
               <Link

@@ -6,80 +6,82 @@ import {
   MenuItemConstructorOptions,
 } from 'electron';
 
+const {autoUpdater} = require('electron-updater');
 
-import path from 'path';
-import { ChildProcess } from 'child_process';
 
-const kill = require('kill-port')
+// import path from 'path';
+// import { ChildProcess } from 'child_process';
 
-// const spawn = require('child_process').execFile;
-const { spawn,exec,execFile,spawnSync } = require('child_process');
-let childList:Array<ChildProcess> = [];
+// const kill = require('kill-port')
 
-const uniqueID = new Date().getTime();
+// // const spawn = require('child_process').execFile;
+// const { spawn,exec,execFile,spawnSync } = require('child_process');
+// let childList:Array<ChildProcess> = [];
 
-if(process.platform === 'win32'){
-  childList.push(spawn(
-    path.join(path.dirname(__dirname), 'extraResources', 'aws_s3.exe'),
-    ['--vybo_log=False', `--unique_id=${uniqueID}`]
-  ));
+// const uniqueID = new Date().getTime();
 
-  childList.push(spawn(path.join(path.dirname(__dirname), 'extraResources', 'main.exe'),
-    [`--unique_id=${uniqueID}`],
-    {
-      stdio: 'ignore'
-    }
-  ));
-}else{
-  childList.push(spawn(
-    path.join(path.dirname(__dirname), 'extraResources', 'aws_s3'),
-    ['--vybo_log=False', `--unique_id=${uniqueID}`]
-  ));
+// if(process.platform === 'win32'){
+//   childList.push(spawn(
+//     path.join(path.dirname(__dirname), 'extraResources', 'aws_s3.exe'),
+//     ['--vybo_log=False', `--unique_id=${uniqueID}`]
+//   ));
 
-  spawn(path.join(path.dirname(__dirname), 'extraResources', 'main'),
-    [`--unique_id=${uniqueID}`],
-    {
-      detached: true,
-      stdio: 'ignore'
-    }
-  ).unref();
-}
+//   childList.push(spawn(path.join(path.dirname(__dirname), 'extraResources', 'main.exe'),
+//     [`--unique_id=${uniqueID}`],
+//     {
+//       stdio: 'ignore'
+//     }
+//   ));
+// }else{
+//   childList.push(spawn(
+//     path.join(path.dirname(__dirname), 'extraResources', 'aws_s3'),
+//     ['--vybo_log=False', `--unique_id=${uniqueID}`]
+//   ));
 
-process.on('exit', function processOnExit() {
-  clearbgTask();
-});
+//   spawn(path.join(path.dirname(__dirname), 'extraResources', 'main'),
+//     [`--unique_id=${uniqueID}`],
+//     {
+//       detached: true,
+//       stdio: 'ignore'
+//     }
+//   ).unref();
+// }
 
-function clearbgTask(){
-  console.log("killing process");
-  childList.forEach(child=>{
-    try{
-      if (process.platform === 'win32'){
-        exec("taskkill -F -T -PID "+child.pid);
-      }else{
-        process.kill(child.pid);
-      }
-    }catch(e){
-      console.log(e);
-    }
-  });
+// process.on('exit', function processOnExit() {
+//   clearbgTask();
+// });
 
-  kill(9999, 'tcp')
-      .then(console.log)
-      .catch(console.log)
+// function clearbgTask(){
+//   console.log("killing process");
+//   childList.forEach(child=>{
+//     try{
+//       if (process.platform === 'win32'){
+//         exec("taskkill -F -T -PID "+child.pid);
+//       }else{
+//         process.kill(child.pid);
+//       }
+//     }catch(e){
+//       console.log(e);
+//     }
+//   });
+
+//   kill(9999, 'tcp')
+//       .then(console.log)
+//       .catch(console.log)
   
-  if (process.platform === 'win32'){
-    spawnSync(path.join(path.dirname(__dirname), 'extraResources', 'aws_s3.exe'),
-      ['--vybo_log=True', `--unique_id=${uniqueID}`]
-    );
-  }else{
-    spawn(path.join(path.dirname(__dirname), 'extraResources', 'aws_s3'),
-      ['--vybo_log=True', `--unique_id=${uniqueID}`],
-      {
-        detached: true, 
-      }
-    );
-  }
-}
+//   if (process.platform === 'win32'){
+//     spawnSync(path.join(path.dirname(__dirname), 'extraResources', 'aws_s3.exe'),
+//       ['--vybo_log=True', `--unique_id=${uniqueID}`]
+//     );
+//   }else{
+//     spawn(path.join(path.dirname(__dirname), 'extraResources', 'aws_s3'),
+//       ['--vybo_log=True', `--unique_id=${uniqueID}`],
+//       {
+//         detached: true, 
+//       }
+//     );
+//   }
+// }
 
 interface DarwinMenuItemConstructorOptions extends MenuItemConstructorOptions {
   selector?: string;

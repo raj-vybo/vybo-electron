@@ -2,8 +2,7 @@ import React, { FormEvent, useReducer, useState } from 'react';
 import { useHistory, useParams, Link } from 'react-router-dom';
 
 import VerificationKeySvg from 'resources/svgs/authentication/VerificationKeySvg.svg';
-import { Button, Form } from 'react-bootstrap';
-import { machineIdSync } from 'node-machine-id';
+import { Button } from 'react-bootstrap';
 import codeValidator from '../validators/verification-code.validator';
 import {
   passwordValidator,
@@ -27,7 +26,7 @@ import { FormChangePropTypes } from './set-pass.types';
 const SetPassword = () => {
   const history = useHistory();
 
-  const { pendingUser, setPendingUser, setUser } = useAuth();
+  const { pendingUser, setPendingUser } = useAuth();
 
   const [showResendMsg, setShowResendMsg] = useState(false);
 
@@ -81,17 +80,8 @@ const SetPassword = () => {
       password: state.password,
       otp: +state.code,
       email: pendingUser?.email || '',
-      isSignupFlow: isRegistrationFlow,
-      machineId: machineIdSync(true),
     }).then((res) => {
       if (res.success) {
-        if (isRegistrationFlow)
-          setUser({
-            name: res.data.name,
-            email: res.data.email,
-            token: res.data.jwt,
-            loginDone: res.data.loginDone || false,
-          });
         dispatch({ type: 'SET_PASSWORD_SUCCESS' });
       } else {
         dispatch({
@@ -138,61 +128,52 @@ const SetPassword = () => {
           if (state.passwordSetSuccessfully) {
             return (
               <VyboAccountButton
-                onClick={() =>
-                  history.push(isRegistrationFlow ? '/' : '/login')
-                }
+                onClick={() => history.push('/login')}
                 hasError={false}
               >
-                {isRegistrationFlow
-                  ? 'Start Whiteboarding'
-                  : 'Proceed to Login'}
+                Login & Start Whiteboarding
               </VyboAccountButton>
             );
           }
           return (
             <>
-              <Form
-                onSubmit={onSetPassFormSubmit}
-                className="w-100 d-flex align-items-center justify-content-center flex-column"
+              <VyboInputBox
+                iconAlt="code"
+                placeholder="Enter 6 digit key"
+                iconSource={VerificationKeySvg}
+                type="text"
+                error={state.codeError || undefined}
+                value={state.code}
+                onChange={(e) => onFormChange({ code: e.target.value })}
+              />
+
+              <VyboInputPassword
+                placeholder="New password"
+                error={state.passwordError || undefined}
+                value={state.password}
+                onChange={(e) => onFormChange({ password: e.target.value })}
+              />
+
+              <VyboInputPassword
+                placeholder="Confirm new password"
+                error={state.confirmPasswordError || undefined}
+                value={state.confirmPassword}
+                onChange={(e) =>
+                  onFormChange({ confirmPassword: e.target.value })
+                }
+              />
+
+              {state.error && (
+                <VyboAccountErrorMsg>{state.error}</VyboAccountErrorMsg>
+              )}
+
+              <VyboAccountButton
+                onClick={onSetPassFormSubmit}
+                hasError={!!state.error}
+                disabled={state.submitting}
               >
-                <VyboInputBox
-                  iconAlt="code"
-                  placeholder="Enter 6 digit key"
-                  iconSource={VerificationKeySvg}
-                  type="text"
-                  error={state.codeError || undefined}
-                  value={state.code}
-                  onChange={(e) => onFormChange({ code: e.target.value })}
-                />
-
-                <VyboInputPassword
-                  placeholder="New password"
-                  error={state.passwordError || undefined}
-                  value={state.password}
-                  onChange={(e) => onFormChange({ password: e.target.value })}
-                />
-
-                <VyboInputPassword
-                  placeholder="Confirm new password"
-                  error={state.confirmPasswordError || undefined}
-                  value={state.confirmPassword}
-                  onChange={(e) =>
-                    onFormChange({ confirmPassword: e.target.value })
-                  }
-                />
-
-                {state.error && (
-                  <VyboAccountErrorMsg>{state.error}</VyboAccountErrorMsg>
-                )}
-
-                <VyboAccountButton
-                  type="submit"
-                  hasError={!!state.error}
-                  disabled={state.submitting}
-                >
-                  {isRegistrationFlow ? 'Proceed' : 'Reset password'}
-                </VyboAccountButton>
-              </Form>
+                {isRegistrationFlow ? 'Proceed' : 'Reset password'}
+              </VyboAccountButton>
 
               <p style={SIGN_UP_LINE_STYLES}>
                 Did not receive the code?

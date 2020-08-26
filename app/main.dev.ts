@@ -12,6 +12,7 @@ import path from 'path';
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
+import {version} from './package.json';
 
 import MenuBuilder from './menu';
 
@@ -22,6 +23,10 @@ export default class AppUpdater {
     autoUpdater.checkForUpdatesAndNotify();
   }
 }
+
+app.getVersion = ()=> version;
+
+autoUpdater.updateConfigPath = path.join(path.dirname(__dirname), 'release', 'latest-mac.yml');
 
 let mainWindow: BrowserWindow | null = null;
 
@@ -131,7 +136,9 @@ const createWindow = async () => {
 
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
-  new AppUpdater();
+  // new AppUpdater();
+  autoUpdater.setFeedURL({ provider: 'github', owner: 'raj-vybo', repo:'vybo-electron', token: '5b62964486e5344fab432b898f62b8037000e637' })
+  autoUpdater.checkForUpdates();
 };
 
 /**
@@ -166,3 +173,39 @@ function showFeedbackToUser(
     currentLocation[1] === ''
   );
 }
+
+
+const sendStatusToWindow = (text) => {
+  console.log(text);
+  if (mainWindow) {
+    mainWindow.webContents.send('message', text);
+  }
+};
+
+autoUpdater.on('checking-for-update', () => {
+  sendStatusToWindow('Checking for update...');
+});
+autoUpdater.on('update-available', info => {
+  sendStatusToWindow('Update available.');
+});
+autoUpdater.on('update-not-available', info => {
+  sendStatusToWindow('Update not available.');
+});
+autoUpdater.on('error', err => {
+  sendStatusToWindow(`Error in auto-updater: ${err.toString()}`);
+});
+autoUpdater.on('download-progress', progressObj => {
+  sendStatusToWindow(
+    `Download speed: ${progressObj.bytesPerSecond} - Downloaded ${progressObj.percent}% (${progressObj.transferred} + '/' + ${progressObj.total} + )`
+  );
+});
+autoUpdater.on('update-downloaded', info => {
+  sendStatusToWindow('Update downloaded; will install now');
+});
+
+autoUpdater.on('update-downloaded', info => {
+  // Wait 5 seconds, then quit and install
+  // In your application, you don't need to wait 500 ms.
+  // You could call autoUpdater.quitAndInstall(); immediately
+  autoUpdater.quitAndInstall();
+});

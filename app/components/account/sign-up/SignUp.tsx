@@ -2,7 +2,6 @@ import React, { FormEvent, useReducer } from 'react';
 import EmailAddressSvg from 'resources/svgs/authentication/EmailAddressSvg.svg';
 import UsernameSvg from 'resources/svgs/authentication/UsernameSvg.svg';
 import { useHistory, Link } from 'react-router-dom';
-import { Form } from 'react-bootstrap';
 import nameValidator from '../validators/name.validator';
 import emailValidator from '../validators/email.validator';
 import { signupReducer, initialSignupState } from './signup.logic';
@@ -73,42 +72,37 @@ const Signup = () => {
       {{
         mainContent: (
           <>
-            <Form
-              onSubmit={onSignupFormSubmit}
-              className="w-100 d-flex align-items-center justify-content-center flex-column"
+            <VyboInputBox
+              iconAlt="username"
+              placeholder="Username "
+              iconSource={UsernameSvg}
+              type="text"
+              error={state.nameError || undefined}
+              value={state.name}
+              onChange={(e) => onFormChange({ name: e.target.value })}
+            />
+
+            <VyboInputBox
+              iconAlt="email"
+              iconSource={EmailAddressSvg}
+              type="text"
+              placeholder="Email address"
+              error={state.emailError || undefined}
+              value={state.email}
+              onChange={(e) => onFormChange({ email: e.target.value })}
+            />
+
+            {state.error && (
+              <VyboAccountErrorMsg>{state.error}</VyboAccountErrorMsg>
+            )}
+
+            <VyboAccountButton
+              onClick={onSignupFormSubmit}
+              hasError={!!state.error}
+              disabled={state.submitting}
             >
-              <VyboInputBox
-                iconAlt="username"
-                placeholder="Username "
-                iconSource={UsernameSvg}
-                type="text"
-                error={state.nameError || undefined}
-                value={state.name}
-                onChange={(e) => onFormChange({ name: e.target.value })}
-              />
-
-              <VyboInputBox
-                iconAlt="email"
-                iconSource={EmailAddressSvg}
-                type="text"
-                placeholder="Email address"
-                error={state.emailError || undefined}
-                value={state.email}
-                onChange={(e) => onFormChange({ email: e.target.value })}
-              />
-
-              {state.error && (
-                <VyboAccountErrorMsg>{state.error}</VyboAccountErrorMsg>
-              )}
-
-              <VyboAccountButton
-                hasError={!!state.error}
-                disabled={state.submitting}
-                type="submit"
-              >
-                Proceed
-              </VyboAccountButton>
-            </Form>
+              Proceed
+            </VyboAccountButton>
 
             {/* Refactorable for signup and login pages */}
             <p style={SIGN_UP_LINE_STYLES}>

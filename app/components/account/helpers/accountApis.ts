@@ -49,8 +49,6 @@ type SetPasswordAPIInput = {
   email: string;
   otp: number;
   password: string;
-  isSignupFlow: boolean;
-  machineId: string;
 };
 export const setPasswordApi = (
   data: SetPasswordAPIInput

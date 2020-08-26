@@ -15,7 +15,7 @@
     "lint-fix": "yarn --silent lint --fix; exit 0",
     "lint-styles": "stylelint --ignore-path .eslintignore '**/*.*(css|scss)' --syntax scss",
     "lint-styles-fix": "yarn --silent lint-styles --fix; exit 0",
-    "package": "yarn build && electron-builder build --publish never",
+    "package": "yarn build && electron-builder build --x64 --publish always",
     "package-all": "yarn build && electron-builder build -mwl",
     "package-ci": "yarn postinstall && yarn build && electron-builder --publish always",
     "package-mac": "yarn build && electron-builder build --mac",
@@ -47,8 +47,12 @@
     ]
   },
   "build": {
+    "publish": [{
+      "provider": "github",
+      "channel": "latest"
+    }],
     "productName": "Wytboard",
-    "appId": "org.akhilesh.Wytboard",
+    "appId": "org.raj-vybo.Wytboard",
     "files": [
       "dist/",
       "node_modules/",
@@ -71,6 +75,16 @@
         }
       ]
     },
+    "mac": {
+      "category": "your.app.category.type",
+      "target": [
+        "zip",
+        "dmg"
+      ]
+    },
+    "nsis": {
+      "perMachine": true
+    },
     "win": {
       "target": [
         "nsis",
@@ -89,12 +103,6 @@
       "buildResources": "resources",
       "output": "release"
     },
-    "publish": {
-      "provider": "github",
-      "owner": "akhilesh",
-      "repo": "wytboard",
-      "private": false
-    },
     "extraResources": [
       {
         "from": "./extraResources/",
@@ -107,22 +115,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wytboard/wytboard.git"
+    "url": "git+https://github.com/raj-vybo/vybo-electron.git"
   },
   "author": {
-    "name": "akhilesh",
-    "email": "ksr.akhilesh@wytboard.io",
-    "url": "https://github.com/wytboard/wytboard"
+    "name": "Raj",
+    "email": "raj.kumar@vybo.io",
+    "url": "https://github.com/raj-vybo/vybo-electron.git"
   },
   "contributors": [
     {
-      "name": "KSR Akhilesh",
-      "email": "ksr.akhilesh@wytboard.io"
+      "name": "KSR raj-vybo",
+      "email": "ksr.raj-vybo@wytboard.io"
     }
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wytboard/wytboard/issues"
+    "url": "https://github.com/raj-vybo/vybo-electron/issues"
   },
   "keywords": [
     "wytboard",
@@ -133,7 +141,7 @@
     "sass",
     "webpack"
   ],
-  "homepage": "https://github.com/wytboard/wytboard#readme",
+  "homepage": "https://github.com/raj-vybo/vybo-electron#readme",
   "devDependencies": {
     "@amilajack/testcafe-browser-provider-electron": "^0.0.15-alpha.1",
     "@babel/core": "^7.10.4",
@@ -247,8 +255,8 @@
     "chart.js": "^2.9.3",
     "compressorjs": "^1.0.6",
     "electron-debug": "^3.1.0",
-    "electron-log": "^4.2.2",
-    "electron-updater": "^4.3.1",
+    "electron-log": "^4.2.4",
+    "electron-updater": "^4.3.4",
     "history": "4.7.2",
     "jquery": "^3.5.1",
     "kill-port": "^1.6.1",
@@ -276,7 +284,7 @@
     "yarn": ">=0.21.3"
   },
   "collective": {
-    "url": "KSR Akhilesh bank account"
+    "url": "KSR raj-vybo bank account"
   },
   "browserslist": [
     "extends browserslist-config-erb"
