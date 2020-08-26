@@ -137,7 +137,6 @@ const createWindow = async () => {
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
   // new AppUpdater();
-  autoUpdater.setFeedURL({ provider: 'github', owner: 'raj-vybo', repo:'vybo-electron', token: '5b62964486e5344fab432b898f62b8037000e637' })
   autoUpdater.checkForUpdates();
 };
 
